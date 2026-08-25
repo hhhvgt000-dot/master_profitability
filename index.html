@@ -1171,6 +1171,12 @@
       return `${Number(val).toFixed(1)}%`;
     }
 
+    function getRouteLabel(p) {
+      const route = p.노선 || "-";
+      const detail = (p.세부노선 && p.세부노선.trim() !== "" && p.세부노선.trim() !== "-") ? ` | ${p.세부노선}` : "";
+      return `${route}${detail}`;
+    }
+
     function getSurplusDeficitHtml(state) {
       if (!state) return "-";
       const isSurplus = state.includes("흑자");
@@ -1522,7 +1528,7 @@
             <td><span class="master-code">${p.마스터코드}</span></td>
             <td>
               <div style="font-weight: 600;">${p.국가 || "-"}</div>
-              <div class="route-label">${p.노선 || "-"} | ${p.세부노선 || "-"}</div>
+              <div class="route-label">${getRouteLabel(p)}</div>
             </td>
             <td class="number-col" style="font-weight: 700; color: var(--primary);">${formatPercentRaw(p.정산수익_올해비중)}</td>
             <td class="number-col" style="font-weight: 700;">${formatRevenue(p.정산수익_올해)}</td>
@@ -1590,7 +1596,7 @@
             <td><span class="master-code">${p.마스터코드}</span></td>
             <td>
               <div style="font-weight: 600;">${p.국가 || "-"}</div>
-              <div class="route-label">${p.노선 || "-"} | ${p.세부노선 || "-"}</div>
+              <div class="route-label">${getRouteLabel(p)}</div>
             </td>
             <td class="number-col" style="font-weight: 700; color: var(--primary);">${formatRevenue(p.인당수익_올해)}</td>
             <td class="number-col" style="color: var(--text-muted);">${formatRevenue(p.인당수익_작년)}</td>
@@ -1749,7 +1755,7 @@
             <td><span class="master-code">${p.마스터코드}</span></td>
             <td>
               <div style="font-weight: 600;">${p.국가 || "-"}</div>
-              <div class="route-label">${p.노선 || "-"} | ${p.세부노선 || "-"}</div>
+              <div class="route-label">${getRouteLabel(p)}</div>
             </td>
             <td class="number-col ${rateClass}" style="font-weight: 700;">${formatPercent(rateVal)}</td>
             <td class="number-col" style="font-weight: 600;">${formatRevenue(p.인당수익_올해)}</td>
